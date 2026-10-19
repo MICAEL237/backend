@@ -1,12 +1,34 @@
 generator client {
     provider = "prisma-client-js"
-    output = "../src/generate/prisma"
+    output = "../generated/prisma"
     url = env("DATABASE_URL")
 }
 
 
 datasource db{
     provider ="postgresql"
+    
 }
 
+enum  role {
+    citoyen
+    agent_municipale
+    admin
+}
+
+
+model User {
+    id String @default(uuid())
+    first_name String 
+    last_name String
+    email String @unique
+    tel String
+    password String
+    role role @default(citoyen)
+    profil_picture String?
+    otpTpken String?
+    cree_le DateTime @default(now())
+    mod_le DateTime @updatedAt
+
+}
 

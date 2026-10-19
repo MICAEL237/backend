@@ -1,12 +1,10 @@
-import express, {Request, Response} from 'express'
 import dotenv, { config } from 'dotenv'
 import prisma from './config/prisma'
-
+import app from '../app'
 dotenv.config()
 
 
 const PORT = process.env.PORT || 3000
-const app = express()
 
 
 
