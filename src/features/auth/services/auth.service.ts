@@ -1,15 +1,20 @@
+import { email } from "zod";
 import { ModelAuth } from "../models/auth.model";
+import { LoginType } from "../schemas/login.schema";
 import { RegisterType } from "../schemas/register.schema";
 import { ExistingUser } from "../utils/existing.user";
+import crypto from "crypto";
 import bcrypt from "bcrypt";
+import CreateToken from "../utils/auth.token";
 
 export class ServiceAuth {
   static async create(data: RegisterType) {
     const user = await ExistingUser(data.email);
-    console.log(user)
+    // const usertoken = crypto.randomBytes(192).toString("hex")
+    console.log(user);
 
     try {
-      if (user === false) {
+      if (!user) {
         const Hashpassword = await bcrypt.hash(data.password, 12);
 
         const createData = {
@@ -20,11 +25,34 @@ export class ServiceAuth {
           tel: data.tel,
         };
         const create = await ModelAuth.createUser(createData);
-        console.log(create)
+        console.log(create);
       }
     } catch (error) {
-        console.log("createUserService", error)
+      console.log("createUserService", error);
     }
     return user;
+  }
+
+  static async Login(data: LoginType) {
+    try {
+      const user = await ExistingUser(data.email);
+      const password = await ModelAuth.selctPasword(data.email)
+      if(!password?.password) return
+
+      if (user) {
+        const VerifyPassword = await bcrypt.compare(
+          data.password,
+          password?.password,
+        );
+        if (VerifyPassword === true) {
+          const token = await CreateToken(user);
+          return {token, user};
+        }
+
+        console.log("login");
+      }
+    } catch (error) {
+      console.log("login", error);
+    }
   }
 }

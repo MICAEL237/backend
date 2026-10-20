@@ -1,6 +1,7 @@
 import z, { infer } from "zod";
 
 export const RegisterSchema = z.object({
+  id: z.string().optional(),
   first_name: z.string().min(1, "Veuillez renseigner votre nom").max(155),
   last_name: z.string().min(1, "Veuillez renseigner votre nom").max(255),
   password: z
