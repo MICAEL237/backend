@@ -2,14 +2,14 @@ import { NextFunction, Request, Response } from "express";
 import  jwt  from "jsonwebtoken";
 import dotenv from 'dotenv'
 import { success } from "zod";
-import { fa } from "zod/v4/locales";
 dotenv.config()
 
 
 export const VerrifyUser = (req: Request, res: Response, next: NextFunction) =>{
 
 
-        const token = req.cookies["cookie_token"]
+       try {
+         const token = req.cookies["cookie_token"]
         const SECRET_KEY_JWT = process.env.SECRET_KEY_JWT 
 
 
@@ -26,6 +26,10 @@ export const VerrifyUser = (req: Request, res: Response, next: NextFunction) =>{
        req.user = {id: payload.id, email: payload.email, role: payload.role} 
 
        next()
+       } catch (error) {
+        res.status(500).json({success:true, error})
+        
+       }
 }
 
 
@@ -49,7 +53,7 @@ export const VerifyRoleadmin = (req: Request, res:Response, next: NextFunction) 
 
 
 
-export const VerifyRoleAm = (req: Request, res:Response, next: NextFunction) =>{
+export const VerifyRoleA_m = (req: Request, res:Response, next: NextFunction) =>{
     const user  =   req.user
 
     if(!user){
@@ -58,7 +62,7 @@ export const VerifyRoleAm = (req: Request, res:Response, next: NextFunction) =>{
 
     const role = user.role
 
-    if(!role || role != "agent_municipale" || role != "agent_municipale"){
+    if(!role || role != "agent_municipale" || role != "admin"){
         return res.status(403).json({success:false, message:"desole espace reserve"})
     }
 

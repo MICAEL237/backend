@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { ServiceAuth } from "../services/auth.service";
 import { success } from "zod";
 import { ModelAuth } from "../models/auth.model";
+import { fa } from "zod/v4/locales";
 
 export class AuthControllers {
   static async CreateUser(req: Request, res: Response) {
@@ -75,6 +76,22 @@ export class AuthControllers {
       return res.status(200).json({ success: true, user: user });
     } catch (error) {
       res.status(500).json({ success: false, message: error });
+    }
+  }
+
+  static async UpdatePassword(req: Request, res: Response){
+    const {email, password} = req.body
+
+    if(!email || !password){
+      return res.status(400).json({success: false, message: "Veuillez renseigner tous les champs"})
+    }
+
+    try {
+      const update = await ModelAuth.UpdatePassword(email, password)
+      return res.status(200)
+    } catch (error) {
+      res.status(500).json({success:false, message: error})
+      
     }
   }
 }

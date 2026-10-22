@@ -46,7 +46,7 @@ export class ServiceAuth {
         );
         if (VerifyPassword === true) {
           const token = await CreateToken(user);
-          return {token, user};
+          return token;
         }
 
         console.log("login");

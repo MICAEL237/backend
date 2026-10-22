@@ -1,5 +1,5 @@
 import z, { infer } from "zod";
-
+type role = "citoyen" | "agent_municipal" | "admin"
 export const RegisterSchema = z.object({
   id: z.string().optional(),
   first_name: z.string().min(1, "Veuillez renseigner votre nom").max(155),
@@ -9,6 +9,7 @@ export const RegisterSchema = z.object({
     .min(8, "Le mot de passe dois avoir minimum 8 caracteres"),
   email: z.email("Veuillez mentionner votre email"),
   tel: z.string().min(9, "Le numero de telephone doit avoir au moin 9 caracteres"),
+  role: z.enum(["citoyen","agent_municipal", "admin"])
 });
 
 

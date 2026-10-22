@@ -8,9 +8,8 @@ const AuthRoute = Router()
 
 
 AuthRoute.post('/', VerifySchema(RegisterSchema ), AuthControllers.CreateUser)
-AuthRoute.get('/', AuthControllers.readUser)
 AuthRoute.post('/login', VerifySchema(LoginSchema ), AuthControllers.Login)
-AuthRoute.get('/me',  AuthControllers.Me)
+
 
 
 

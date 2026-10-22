@@ -45,4 +45,16 @@ export class ModelAuth {
       console.log("user", error);
     }
   }
+
+  static async UpdatePassword(email: string, password: string) {
+    try {
+      const update = await prisma.user.update({
+        where: { email: email },
+        data: { password },
+      });
+      return update;
+    } catch (error) {
+      console.log("UpdatePassword", error);
+    }
+  }
 }
