@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 import { RegisterType } from '../schemas/register.schema'
 import jwt from 'jsonwebtoken'
 import { role } from '../../../../generated/prisma'
-import { PayloadType } from '../../../../types/payload.type'
+import { PayloadType } from '../../../types/payload.type'
 dotenv.config()
 
 

@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
 import { ServiceAuth } from "../services/auth.service";
-import { success } from "zod";
 import { ModelAuth } from "../models/auth.model";
-import { fa } from "zod/v4/locales";
 
 export class AuthControllers {
   static async CreateUser(req: Request, res: Response) {
@@ -50,7 +48,7 @@ export class AuthControllers {
       return res.status(500).json({ success: false, message: error });
     }
 
-    const Cookie = res.cookie("cookie_token", token, {
+    const Cookie = res.cookie("cookie_token", token.token, {
       httpOnly: true,
       secure: true,
       sameSite: "lax",
@@ -59,11 +57,12 @@ export class AuthControllers {
 
     return res
       .status(200)
-      .json({ success: true, token: token.token, user: token.user });
+      .json({ success: true, token: token.token, refreshtoken: token.Refreshtoken });
   }
 
   static async Me(req: Request, res: Response) {
     const currentId = req.user?.id;
+    console.log(currentId)
 
     try {
       if (!currentId) {
@@ -80,18 +79,23 @@ export class AuthControllers {
   }
 
   static async UpdatePassword(req: Request, res: Response){
-    const {email, password} = req.body
+    const body = req.body
 
-    if(!email || !password){
+    if(!body){
       return res.status(400).json({success: false, message: "Veuillez renseigner tous les champs"})
     }
 
     try {
-      const update = await ModelAuth.UpdatePassword(email, password)
+      const update = await ServiceAuth.UpdatePassword(body)
+      if(!update){
+        return res.status(404).json({success:true, message:"cet utilisateur n'existe pas"})
+      }
       return res.status(200)
     } catch (error) {
       res.status(500).json({success:false, message: error})
       
     }
+
+    return res.status(200)
   }
 }

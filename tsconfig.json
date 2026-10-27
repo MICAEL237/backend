@@ -3,7 +3,7 @@
 "target": "ES2022",
 "module": "nodenext",
 "moduleResolution": "nodenext",
-"rootDir": "prisma/src",
+"rootDir": "src",
 "outDir": "./dist",
 "esModuleInterop": true,
 "forceConsistentCasingInFileNames": true,
@@ -12,6 +12,6 @@
 "resolveJsonModule": true,
 "sourceMap": true
 },
-"include": ["prisma/src/**/*.ts"],
+"include": ["src/**/*.ts"],
 "exclude": ["node_modules", "dist"]
 }

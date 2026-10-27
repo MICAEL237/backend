@@ -14,16 +14,73 @@ enum role {
   admin
 }
 
+enum status {
+  reçus
+  en_cours
+  rejetter
+  resolus
+}
+
 model User {
-  id             String   @default(uuid())
+  id             String         @unique @default(uuid())
   first_name     String
   last_name      String
-  email          String   @unique
+  email          String         @unique
   tel            String
   password       String
-  role           role     @default(citoyen)
+  role           role           @default(citoyen)
   profil_picture String?
   otpTpken       String?
-  cree_le        DateTime @default(now())
-  mod_le         DateTime @updatedAt
+  cree_le        DateTime       @default(now())
+  mod_le         DateTime       @updatedAt
+  communeId      String
+  commune        Commune        @relation(fields: [communeId], references: [id], onUpdate: Cascade)
+  signalement    Signalemment[]
+  assignation    Assignation[]
+}
+
+model Commune {
+  id         String @unique @default(uuid())
+  nom        String @unique
+  nom_ville  String
+  population Int?
+
+  creer_le    DateTime       @default(now())
+  mod_lw      DateTime       @updatedAt
+  signalement Signalemment[]
+
+  user User[]
+}
+
+model Signalemment {
+  id          String        @unique @default(uuid())
+  description String
+  categorie   String
+  image       String
+  latitude    String
+  longitude   String
+  status      status        @default(reçus)
+  user        String
+  commune     String
+  creer_le    DateTime      @default(now())
+  mod_lw      DateTime      @updatedAt
+  UderId      User          @relation(fields: [user], references: [id], onUpdate: Cascade)
+  categorieId Categorie     @relation(fields: [categorie], references: [id], onUpdate: Cascade)
+  communeid   Commune       @relation(fields: [commune], references: [id], onUpdate: Cascade)
+  assignation Assignation[]
+}
+
+model Categorie {
+  id          String         @unique @default(uuid())
+  nom         String
+  signalement Signalemment[]
+}
+
+model Assignation {
+  userId        String
+  signalementId String
+  user          User         @relation(fields: [userId], references: [id], onUpdate: Cascade)
+  signalement   Signalemment @relation(fields: [signalementId], references: [id], onUpdate: Cascade)
+
+  @@id([userId, signalementId])
 }

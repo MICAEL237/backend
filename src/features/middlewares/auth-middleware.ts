@@ -53,19 +53,19 @@ export const VerifyRoleadmin = (req: Request, res:Response, next: NextFunction) 
 
 
 
-export const VerifyRoleA_m = (req: Request, res:Response, next: NextFunction) =>{
-    const user  =   req.user
+// export const VerifyRoleA_m = (req: Request, res:Response, next: NextFunction) =>{
+//     const user  =   req.user
 
-    if(!user){
-        return res.status(401).json({success:false, message:"Non authentifier"})
-    }
+//     if(!user){
+//         return res.status(401).json({success:false, message:"Non authentifier"})
+//     }
 
-    const role = user.role
+//     const role = user.role
 
-    if(!role || role != "agent_municipale" || role != "admin"){
-        return res.status(403).json({success:false, message:"desole espace reserve"})
-    }
+//     if(!role || role != "agent_municipale" || role != "admin"){
+//         return res.status(403).json({success:false, message:"desole espace reserve"})
+//     }
 
-    next()
+//     next()
 
-}
+// }

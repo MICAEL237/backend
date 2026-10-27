@@ -9,7 +9,6 @@ export const RegisterSchema = z.object({
     .min(8, "Le mot de passe dois avoir minimum 8 caracteres"),
   email: z.email("Veuillez mentionner votre email"),
   tel: z.string().min(9, "Le numero de telephone doit avoir au moin 9 caracteres"),
-  role: z.enum(["citoyen","agent_municipal", "admin"])
 });
 
 

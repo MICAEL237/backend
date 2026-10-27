@@ -131,7 +131,41 @@ exports.Prisma.UserScalarFieldEnum = {
   profil_picture: 'profil_picture',
   otpTpken: 'otpTpken',
   cree_le: 'cree_le',
-  mod_le: 'mod_le'
+  mod_le: 'mod_le',
+  communeId: 'communeId'
+};
+
+exports.Prisma.CommuneScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  nom_ville: 'nom_ville',
+  population: 'population',
+  creer_le: 'creer_le',
+  mod_lw: 'mod_lw'
+};
+
+exports.Prisma.SignalemmentScalarFieldEnum = {
+  id: 'id',
+  description: 'description',
+  categorie: 'categorie',
+  image: 'image',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  status: 'status',
+  user: 'user',
+  commune: 'commune',
+  creer_le: 'creer_le',
+  mod_lw: 'mod_lw'
+};
+
+exports.Prisma.CategorieScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom'
+};
+
+exports.Prisma.AssignationScalarFieldEnum = {
+  userId: 'userId',
+  signalementId: 'signalementId'
 };
 
 exports.Prisma.SortOrder = {
@@ -154,8 +188,19 @@ exports.role = exports.$Enums.role = {
   admin: 'admin'
 };
 
+exports.status = exports.$Enums.status = {
+  reçus: 'reçus',
+  en_cours: 'en_cours',
+  rejetter: 'rejetter',
+  resolus: 'resolus'
+};
+
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Commune: 'Commune',
+  Signalemment: 'Signalemment',
+  Categorie: 'Categorie',
+  Assignation: 'Assignation'
 };
 
 /**

@@ -3,9 +3,10 @@ import { ModelAuth } from "../models/auth.model";
 import { LoginType } from "../schemas/login.schema";
 import { RegisterType } from "../schemas/register.schema";
 import { ExistingUser } from "../utils/existing.user";
-import crypto from "crypto";
 import bcrypt from "bcrypt";
 import CreateToken from "../utils/auth.token";
+import { fdatasync } from "node:fs";
+import CreateRefreshToken from "../utils/auth.refresh.token";
 
 export class ServiceAuth {
   static async create(data: RegisterType) {
@@ -36,8 +37,8 @@ export class ServiceAuth {
   static async Login(data: LoginType) {
     try {
       const user = await ExistingUser(data.email);
-      const password = await ModelAuth.selctPasword(data.email)
-      if(!password?.password) return
+      const password = await ModelAuth.selctPasword(data.email);
+      if (!password?.password) return;
 
       if (user) {
         const VerifyPassword = await bcrypt.compare(
@@ -46,13 +47,27 @@ export class ServiceAuth {
         );
         if (VerifyPassword === true) {
           const token = await CreateToken(user);
-          return token;
+          const Refreshtoken = await CreateRefreshToken(user)
+          return {token, Refreshtoken};
         }
 
         console.log("login");
       }
     } catch (error) {
       console.log("login", error);
+    }
+  }
+
+  static async UpdatePassword(data: LoginType) {
+    const user = await ExistingUser(data.email);
+    if (user) {
+      try {
+        const pasword = await bcrypt.hash(data.password, 12);
+        const update = await ModelAuth.UpdatePassword(data.email, pasword);
+        return update;
+      } catch (error) {
+        console.log("updatepassword", error);
+      }
     }
   }
 }

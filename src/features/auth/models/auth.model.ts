@@ -37,9 +37,10 @@ export class ModelAuth {
   static async User(id: string): Promise<any> {
     try {
       const User = await prisma.user.findFirst({
-        where: { email: id },
+        where: { id: id },
         omit: { password: true },
       });
+      console.log(User)
       return User;
     } catch (error) {
       console.log("user", error);
