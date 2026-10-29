@@ -22,6 +22,7 @@ export class ServiceAuth {
           first_name: data.first_name,
           last_name: data.last_name,
           password: Hashpassword,
+          communeId: data.communeId,
           email: data.email,
           tel: data.tel,
         };

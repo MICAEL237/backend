@@ -5,6 +5,7 @@ import { ModelAuth } from "../models/auth.model";
 export class AuthControllers {
   static async CreateUser(req: Request, res: Response) {
     const body = req.body;
+    console.log("ici", body)
     try {
       const user = await ServiceAuth.create(body);
 

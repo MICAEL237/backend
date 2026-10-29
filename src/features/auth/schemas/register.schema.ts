@@ -1,9 +1,8 @@
-import z, { infer } from "zod";
-type role = "citoyen" | "agent_municipal" | "admin"
+import z from "zod";
 export const RegisterSchema = z.object({
-  id: z.string().optional(),
   first_name: z.string().min(1, "Veuillez renseigner votre nom").max(155),
   last_name: z.string().min(1, "Veuillez renseigner votre nom").max(255),
+  communeId: z.string(),
   password: z
     .string()
     .min(8, "Le mot de passe dois avoir minimum 8 caracteres"),

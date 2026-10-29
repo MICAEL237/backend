@@ -5,9 +5,22 @@ export class ModelAuth {
   static async createUser(data: RegisterType) {
     try {
       const create = await prisma.user.create({
-        data: data,
-      });
+        data: {
+            first_name: data.first_name,
+            last_name: data.last_name,
+            password: data.password,
+            tel: data.tel,
+            email: data.email,
+            commune: {
+              connect:{
+                id:  data.communeId,
 
+              }
+            }
+        }
+        
+      });
+      console.log(data.first_name)
       return create;
     } catch (error) {
       console.log("Prisma createUser", error);

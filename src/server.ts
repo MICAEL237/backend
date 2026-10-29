@@ -1,6 +1,6 @@
 import dotenv, { config } from 'dotenv'
 import prisma from './config/prisma'
-import app from '../app'
+import app from '../src/app'
 dotenv.config()
 
 

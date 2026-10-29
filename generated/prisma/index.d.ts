@@ -3799,8 +3799,20 @@ export namespace Prisma {
 
   export type AggregateSignalemment = {
     _count: SignalemmentCountAggregateOutputType | null
+    _avg: SignalemmentAvgAggregateOutputType | null
+    _sum: SignalemmentSumAggregateOutputType | null
     _min: SignalemmentMinAggregateOutputType | null
     _max: SignalemmentMaxAggregateOutputType | null
+  }
+
+  export type SignalemmentAvgAggregateOutputType = {
+    latitude: number | null
+    longitude: number | null
+  }
+
+  export type SignalemmentSumAggregateOutputType = {
+    latitude: number | null
+    longitude: number | null
   }
 
   export type SignalemmentMinAggregateOutputType = {
@@ -3808,8 +3820,8 @@ export namespace Prisma {
     description: string | null
     categorie: string | null
     image: string | null
-    latitude: string | null
-    longitude: string | null
+    latitude: number | null
+    longitude: number | null
     status: $Enums.status | null
     user: string | null
     commune: string | null
@@ -3822,8 +3834,8 @@ export namespace Prisma {
     description: string | null
     categorie: string | null
     image: string | null
-    latitude: string | null
-    longitude: string | null
+    latitude: number | null
+    longitude: number | null
     status: $Enums.status | null
     user: string | null
     commune: string | null
@@ -3846,6 +3858,16 @@ export namespace Prisma {
     _all: number
   }
 
+
+  export type SignalemmentAvgAggregateInputType = {
+    latitude?: true
+    longitude?: true
+  }
+
+  export type SignalemmentSumAggregateInputType = {
+    latitude?: true
+    longitude?: true
+  }
 
   export type SignalemmentMinAggregateInputType = {
     id?: true
@@ -3928,6 +3950,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: SignalemmentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SignalemmentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: SignalemmentMinAggregateInputType
@@ -3958,23 +3992,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: SignalemmentCountAggregateInputType | true
+    _avg?: SignalemmentAvgAggregateInputType
+    _sum?: SignalemmentSumAggregateInputType
     _min?: SignalemmentMinAggregateInputType
     _max?: SignalemmentMaxAggregateInputType
   }
 
   export type SignalemmentGroupByOutputType = {
     id: string
-    description: string
+    description: string | null
     categorie: string
     image: string
-    latitude: string
-    longitude: string
+    latitude: number | null
+    longitude: number | null
     status: $Enums.status
     user: string
     commune: string
     creer_le: Date
     mod_lw: Date
     _count: SignalemmentCountAggregateOutputType | null
+    _avg: SignalemmentAvgAggregateOutputType | null
+    _sum: SignalemmentSumAggregateOutputType | null
     _min: SignalemmentMinAggregateOutputType | null
     _max: SignalemmentMaxAggregateOutputType | null
   }
@@ -4089,11 +4127,11 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      description: string
+      description: string | null
       categorie: string
       image: string
-      latitude: string
-      longitude: string
+      latitude: number | null
+      longitude: number | null
       status: $Enums.status
       user: string
       commune: string
@@ -4530,8 +4568,8 @@ export namespace Prisma {
     readonly description: FieldRef<"Signalemment", 'String'>
     readonly categorie: FieldRef<"Signalemment", 'String'>
     readonly image: FieldRef<"Signalemment", 'String'>
-    readonly latitude: FieldRef<"Signalemment", 'String'>
-    readonly longitude: FieldRef<"Signalemment", 'String'>
+    readonly latitude: FieldRef<"Signalemment", 'Int'>
+    readonly longitude: FieldRef<"Signalemment", 'Int'>
     readonly status: FieldRef<"Signalemment", 'status'>
     readonly user: FieldRef<"Signalemment", 'String'>
     readonly commune: FieldRef<"Signalemment", 'String'>
@@ -7283,12 +7321,12 @@ export namespace Prisma {
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     email?: string
+    tel?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     first_name?: StringFilter<"User"> | string
     last_name?: StringFilter<"User"> | string
-    tel?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     role?: EnumroleFilter<"User"> | $Enums.role
     profil_picture?: StringNullableFilter<"User"> | string | null
@@ -7299,7 +7337,7 @@ export namespace Prisma {
     commune?: XOR<CommuneScalarRelationFilter, CommuneWhereInput>
     signalement?: SignalemmentListRelationFilter
     assignation?: AssignationListRelationFilter
-  }, "id" | "email">
+  }, "id" | "email" | "tel">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
@@ -7407,11 +7445,11 @@ export namespace Prisma {
     OR?: SignalemmentWhereInput[]
     NOT?: SignalemmentWhereInput | SignalemmentWhereInput[]
     id?: StringFilter<"Signalemment"> | string
-    description?: StringFilter<"Signalemment"> | string
+    description?: StringNullableFilter<"Signalemment"> | string | null
     categorie?: StringFilter<"Signalemment"> | string
     image?: StringFilter<"Signalemment"> | string
-    latitude?: StringFilter<"Signalemment"> | string
-    longitude?: StringFilter<"Signalemment"> | string
+    latitude?: IntNullableFilter<"Signalemment"> | number | null
+    longitude?: IntNullableFilter<"Signalemment"> | number | null
     status?: EnumstatusFilter<"Signalemment"> | $Enums.status
     user?: StringFilter<"Signalemment"> | string
     commune?: StringFilter<"Signalemment"> | string
@@ -7425,11 +7463,11 @@ export namespace Prisma {
 
   export type SignalemmentOrderByWithRelationInput = {
     id?: SortOrder
-    description?: SortOrder
+    description?: SortOrderInput | SortOrder
     categorie?: SortOrder
     image?: SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
+    latitude?: SortOrderInput | SortOrder
+    longitude?: SortOrderInput | SortOrder
     status?: SortOrder
     user?: SortOrder
     commune?: SortOrder
@@ -7446,11 +7484,11 @@ export namespace Prisma {
     AND?: SignalemmentWhereInput | SignalemmentWhereInput[]
     OR?: SignalemmentWhereInput[]
     NOT?: SignalemmentWhereInput | SignalemmentWhereInput[]
-    description?: StringFilter<"Signalemment"> | string
+    description?: StringNullableFilter<"Signalemment"> | string | null
     categorie?: StringFilter<"Signalemment"> | string
     image?: StringFilter<"Signalemment"> | string
-    latitude?: StringFilter<"Signalemment"> | string
-    longitude?: StringFilter<"Signalemment"> | string
+    latitude?: IntNullableFilter<"Signalemment"> | number | null
+    longitude?: IntNullableFilter<"Signalemment"> | number | null
     status?: EnumstatusFilter<"Signalemment"> | $Enums.status
     user?: StringFilter<"Signalemment"> | string
     commune?: StringFilter<"Signalemment"> | string
@@ -7464,19 +7502,21 @@ export namespace Prisma {
 
   export type SignalemmentOrderByWithAggregationInput = {
     id?: SortOrder
-    description?: SortOrder
+    description?: SortOrderInput | SortOrder
     categorie?: SortOrder
     image?: SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
+    latitude?: SortOrderInput | SortOrder
+    longitude?: SortOrderInput | SortOrder
     status?: SortOrder
     user?: SortOrder
     commune?: SortOrder
     creer_le?: SortOrder
     mod_lw?: SortOrder
     _count?: SignalemmentCountOrderByAggregateInput
+    _avg?: SignalemmentAvgOrderByAggregateInput
     _max?: SignalemmentMaxOrderByAggregateInput
     _min?: SignalemmentMinOrderByAggregateInput
+    _sum?: SignalemmentSumOrderByAggregateInput
   }
 
   export type SignalemmentScalarWhereWithAggregatesInput = {
@@ -7484,11 +7524,11 @@ export namespace Prisma {
     OR?: SignalemmentScalarWhereWithAggregatesInput[]
     NOT?: SignalemmentScalarWhereWithAggregatesInput | SignalemmentScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Signalemment"> | string
-    description?: StringWithAggregatesFilter<"Signalemment"> | string
+    description?: StringNullableWithAggregatesFilter<"Signalemment"> | string | null
     categorie?: StringWithAggregatesFilter<"Signalemment"> | string
     image?: StringWithAggregatesFilter<"Signalemment"> | string
-    latitude?: StringWithAggregatesFilter<"Signalemment"> | string
-    longitude?: StringWithAggregatesFilter<"Signalemment"> | string
+    latitude?: IntNullableWithAggregatesFilter<"Signalemment"> | number | null
+    longitude?: IntNullableWithAggregatesFilter<"Signalemment"> | number | null
     status?: EnumstatusWithAggregatesFilter<"Signalemment"> | $Enums.status
     user?: StringWithAggregatesFilter<"Signalemment"> | string
     commune?: StringWithAggregatesFilter<"Signalemment"> | string
@@ -7765,10 +7805,10 @@ export namespace Prisma {
 
   export type SignalemmentCreateInput = {
     id?: string
-    description: string
+    description?: string | null
     image: string
-    latitude: string
-    longitude: string
+    latitude?: number | null
+    longitude?: number | null
     status?: $Enums.status
     creer_le?: Date | string
     mod_lw?: Date | string
@@ -7780,11 +7820,11 @@ export namespace Prisma {
 
   export type SignalemmentUncheckedCreateInput = {
     id?: string
-    description: string
+    description?: string | null
     categorie: string
     image: string
-    latitude: string
-    longitude: string
+    latitude?: number | null
+    longitude?: number | null
     status?: $Enums.status
     user: string
     commune: string
@@ -7795,10 +7835,10 @@ export namespace Prisma {
 
   export type SignalemmentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: StringFieldUpdateOperationsInput | string
-    latitude?: StringFieldUpdateOperationsInput | string
-    longitude?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableIntFieldUpdateOperationsInput | number | null
+    longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
     creer_le?: DateTimeFieldUpdateOperationsInput | Date | string
     mod_lw?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7810,11 +7850,11 @@ export namespace Prisma {
 
   export type SignalemmentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    latitude?: StringFieldUpdateOperationsInput | string
-    longitude?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableIntFieldUpdateOperationsInput | number | null
+    longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
     user?: StringFieldUpdateOperationsInput | string
     commune?: StringFieldUpdateOperationsInput | string
@@ -7825,11 +7865,11 @@ export namespace Prisma {
 
   export type SignalemmentCreateManyInput = {
     id?: string
-    description: string
+    description?: string | null
     categorie: string
     image: string
-    latitude: string
-    longitude: string
+    latitude?: number | null
+    longitude?: number | null
     status?: $Enums.status
     user: string
     commune: string
@@ -7839,10 +7879,10 @@ export namespace Prisma {
 
   export type SignalemmentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: StringFieldUpdateOperationsInput | string
-    latitude?: StringFieldUpdateOperationsInput | string
-    longitude?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableIntFieldUpdateOperationsInput | number | null
+    longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
     creer_le?: DateTimeFieldUpdateOperationsInput | Date | string
     mod_lw?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7850,11 +7890,11 @@ export namespace Prisma {
 
   export type SignalemmentUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    latitude?: StringFieldUpdateOperationsInput | string
-    longitude?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableIntFieldUpdateOperationsInput | number | null
+    longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
     user?: StringFieldUpdateOperationsInput | string
     commune?: StringFieldUpdateOperationsInput | string
@@ -8221,6 +8261,11 @@ export namespace Prisma {
     mod_lw?: SortOrder
   }
 
+  export type SignalemmentAvgOrderByAggregateInput = {
+    latitude?: SortOrder
+    longitude?: SortOrder
+  }
+
   export type SignalemmentMaxOrderByAggregateInput = {
     id?: SortOrder
     description?: SortOrder
@@ -8247,6 +8292,11 @@ export namespace Prisma {
     commune?: SortOrder
     creer_le?: SortOrder
     mod_lw?: SortOrder
+  }
+
+  export type SignalemmentSumOrderByAggregateInput = {
+    latitude?: SortOrder
+    longitude?: SortOrder
   }
 
   export type EnumstatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -8860,10 +8910,10 @@ export namespace Prisma {
 
   export type SignalemmentCreateWithoutUderIdInput = {
     id?: string
-    description: string
+    description?: string | null
     image: string
-    latitude: string
-    longitude: string
+    latitude?: number | null
+    longitude?: number | null
     status?: $Enums.status
     creer_le?: Date | string
     mod_lw?: Date | string
@@ -8874,11 +8924,11 @@ export namespace Prisma {
 
   export type SignalemmentUncheckedCreateWithoutUderIdInput = {
     id?: string
-    description: string
+    description?: string | null
     categorie: string
     image: string
-    latitude: string
-    longitude: string
+    latitude?: number | null
+    longitude?: number | null
     status?: $Enums.status
     commune: string
     creer_le?: Date | string
@@ -8966,11 +9016,11 @@ export namespace Prisma {
     OR?: SignalemmentScalarWhereInput[]
     NOT?: SignalemmentScalarWhereInput | SignalemmentScalarWhereInput[]
     id?: StringFilter<"Signalemment"> | string
-    description?: StringFilter<"Signalemment"> | string
+    description?: StringNullableFilter<"Signalemment"> | string | null
     categorie?: StringFilter<"Signalemment"> | string
     image?: StringFilter<"Signalemment"> | string
-    latitude?: StringFilter<"Signalemment"> | string
-    longitude?: StringFilter<"Signalemment"> | string
+    latitude?: IntNullableFilter<"Signalemment"> | number | null
+    longitude?: IntNullableFilter<"Signalemment"> | number | null
     status?: EnumstatusFilter<"Signalemment"> | $Enums.status
     user?: StringFilter<"Signalemment"> | string
     commune?: StringFilter<"Signalemment"> | string
@@ -9004,10 +9054,10 @@ export namespace Prisma {
 
   export type SignalemmentCreateWithoutCommuneidInput = {
     id?: string
-    description: string
+    description?: string | null
     image: string
-    latitude: string
-    longitude: string
+    latitude?: number | null
+    longitude?: number | null
     status?: $Enums.status
     creer_le?: Date | string
     mod_lw?: Date | string
@@ -9018,11 +9068,11 @@ export namespace Prisma {
 
   export type SignalemmentUncheckedCreateWithoutCommuneidInput = {
     id?: string
-    description: string
+    description?: string | null
     categorie: string
     image: string
-    latitude: string
-    longitude: string
+    latitude?: number | null
+    longitude?: number | null
     status?: $Enums.status
     user: string
     creer_le?: Date | string
@@ -9340,10 +9390,10 @@ export namespace Prisma {
 
   export type SignalemmentCreateWithoutCategorieIdInput = {
     id?: string
-    description: string
+    description?: string | null
     image: string
-    latitude: string
-    longitude: string
+    latitude?: number | null
+    longitude?: number | null
     status?: $Enums.status
     creer_le?: Date | string
     mod_lw?: Date | string
@@ -9354,10 +9404,10 @@ export namespace Prisma {
 
   export type SignalemmentUncheckedCreateWithoutCategorieIdInput = {
     id?: string
-    description: string
+    description?: string | null
     image: string
-    latitude: string
-    longitude: string
+    latitude?: number | null
+    longitude?: number | null
     status?: $Enums.status
     user: string
     commune: string
@@ -9431,10 +9481,10 @@ export namespace Prisma {
 
   export type SignalemmentCreateWithoutAssignationInput = {
     id?: string
-    description: string
+    description?: string | null
     image: string
-    latitude: string
-    longitude: string
+    latitude?: number | null
+    longitude?: number | null
     status?: $Enums.status
     creer_le?: Date | string
     mod_lw?: Date | string
@@ -9445,11 +9495,11 @@ export namespace Prisma {
 
   export type SignalemmentUncheckedCreateWithoutAssignationInput = {
     id?: string
-    description: string
+    description?: string | null
     categorie: string
     image: string
-    latitude: string
-    longitude: string
+    latitude?: number | null
+    longitude?: number | null
     status?: $Enums.status
     user: string
     commune: string
@@ -9518,10 +9568,10 @@ export namespace Prisma {
 
   export type SignalemmentUpdateWithoutAssignationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: StringFieldUpdateOperationsInput | string
-    latitude?: StringFieldUpdateOperationsInput | string
-    longitude?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableIntFieldUpdateOperationsInput | number | null
+    longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
     creer_le?: DateTimeFieldUpdateOperationsInput | Date | string
     mod_lw?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9532,11 +9582,11 @@ export namespace Prisma {
 
   export type SignalemmentUncheckedUpdateWithoutAssignationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    latitude?: StringFieldUpdateOperationsInput | string
-    longitude?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableIntFieldUpdateOperationsInput | number | null
+    longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
     user?: StringFieldUpdateOperationsInput | string
     commune?: StringFieldUpdateOperationsInput | string
@@ -9546,11 +9596,11 @@ export namespace Prisma {
 
   export type SignalemmentCreateManyUderIdInput = {
     id?: string
-    description: string
+    description?: string | null
     categorie: string
     image: string
-    latitude: string
-    longitude: string
+    latitude?: number | null
+    longitude?: number | null
     status?: $Enums.status
     commune: string
     creer_le?: Date | string
@@ -9563,10 +9613,10 @@ export namespace Prisma {
 
   export type SignalemmentUpdateWithoutUderIdInput = {
     id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: StringFieldUpdateOperationsInput | string
-    latitude?: StringFieldUpdateOperationsInput | string
-    longitude?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableIntFieldUpdateOperationsInput | number | null
+    longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
     creer_le?: DateTimeFieldUpdateOperationsInput | Date | string
     mod_lw?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9577,11 +9627,11 @@ export namespace Prisma {
 
   export type SignalemmentUncheckedUpdateWithoutUderIdInput = {
     id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    latitude?: StringFieldUpdateOperationsInput | string
-    longitude?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableIntFieldUpdateOperationsInput | number | null
+    longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
     commune?: StringFieldUpdateOperationsInput | string
     creer_le?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9591,11 +9641,11 @@ export namespace Prisma {
 
   export type SignalemmentUncheckedUpdateManyWithoutUderIdInput = {
     id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    latitude?: StringFieldUpdateOperationsInput | string
-    longitude?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableIntFieldUpdateOperationsInput | number | null
+    longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
     commune?: StringFieldUpdateOperationsInput | string
     creer_le?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9616,11 +9666,11 @@ export namespace Prisma {
 
   export type SignalemmentCreateManyCommuneidInput = {
     id?: string
-    description: string
+    description?: string | null
     categorie: string
     image: string
-    latitude: string
-    longitude: string
+    latitude?: number | null
+    longitude?: number | null
     status?: $Enums.status
     user: string
     creer_le?: Date | string
@@ -9643,10 +9693,10 @@ export namespace Prisma {
 
   export type SignalemmentUpdateWithoutCommuneidInput = {
     id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: StringFieldUpdateOperationsInput | string
-    latitude?: StringFieldUpdateOperationsInput | string
-    longitude?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableIntFieldUpdateOperationsInput | number | null
+    longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
     creer_le?: DateTimeFieldUpdateOperationsInput | Date | string
     mod_lw?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9657,11 +9707,11 @@ export namespace Prisma {
 
   export type SignalemmentUncheckedUpdateWithoutCommuneidInput = {
     id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    latitude?: StringFieldUpdateOperationsInput | string
-    longitude?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableIntFieldUpdateOperationsInput | number | null
+    longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
     user?: StringFieldUpdateOperationsInput | string
     creer_le?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9671,11 +9721,11 @@ export namespace Prisma {
 
   export type SignalemmentUncheckedUpdateManyWithoutCommuneidInput = {
     id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    latitude?: StringFieldUpdateOperationsInput | string
-    longitude?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableIntFieldUpdateOperationsInput | number | null
+    longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
     user?: StringFieldUpdateOperationsInput | string
     creer_le?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9746,10 +9796,10 @@ export namespace Prisma {
 
   export type SignalemmentCreateManyCategorieIdInput = {
     id?: string
-    description: string
+    description?: string | null
     image: string
-    latitude: string
-    longitude: string
+    latitude?: number | null
+    longitude?: number | null
     status?: $Enums.status
     user: string
     commune: string
@@ -9759,10 +9809,10 @@ export namespace Prisma {
 
   export type SignalemmentUpdateWithoutCategorieIdInput = {
     id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: StringFieldUpdateOperationsInput | string
-    latitude?: StringFieldUpdateOperationsInput | string
-    longitude?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableIntFieldUpdateOperationsInput | number | null
+    longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
     creer_le?: DateTimeFieldUpdateOperationsInput | Date | string
     mod_lw?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9773,10 +9823,10 @@ export namespace Prisma {
 
   export type SignalemmentUncheckedUpdateWithoutCategorieIdInput = {
     id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: StringFieldUpdateOperationsInput | string
-    latitude?: StringFieldUpdateOperationsInput | string
-    longitude?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableIntFieldUpdateOperationsInput | number | null
+    longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
     user?: StringFieldUpdateOperationsInput | string
     commune?: StringFieldUpdateOperationsInput | string
@@ -9787,10 +9837,10 @@ export namespace Prisma {
 
   export type SignalemmentUncheckedUpdateManyWithoutCategorieIdInput = {
     id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: StringFieldUpdateOperationsInput | string
-    latitude?: StringFieldUpdateOperationsInput | string
-    longitude?: StringFieldUpdateOperationsInput | string
+    latitude?: NullableIntFieldUpdateOperationsInput | number | null
+    longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
     user?: StringFieldUpdateOperationsInput | string
     commune?: StringFieldUpdateOperationsInput | string

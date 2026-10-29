@@ -7,7 +7,7 @@ export const VerifySchema = (schema: ZodType) =>{
         const resultat =  schema.safeParse(datas)
 
         if(!resultat.success || !resultat){
-            return res.status(400).json({success: false, message: "inofrmation non valide ...", error: resultat.error})
+            return res.status(400).json({success: false, message: "inofrmation non valide ...", error: resultat.error.message})
         }
 
         next()
