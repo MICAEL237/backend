@@ -23,10 +23,10 @@ export const SIGN_MULTER = multer({
 
     
     }),
-    limits: {fileSize: SIGN_Max_TAILLE, fields: 1},
+    limits: {fileSize: SIGN_Max_TAILLE,files:1,  fields: 10},
     fileFilter: (req, file, cb) =>{
             if(!TYPE_FILE[file.mimetype]){
-                cb(new Error("ce type de fichier n'est pas pris en compte"))
+                return  cb(new Error("ce type de fichier n'est pas pris en compte"))
 
             }
 

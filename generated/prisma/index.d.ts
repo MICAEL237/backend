@@ -4002,7 +4002,7 @@ export namespace Prisma {
     id: string
     description: string | null
     categorie: string
-    image: string
+    image: string | null
     latitude: number | null
     longitude: number | null
     status: $Enums.status
@@ -4129,7 +4129,7 @@ export namespace Prisma {
       id: string
       description: string | null
       categorie: string
-      image: string
+      image: string | null
       latitude: number | null
       longitude: number | null
       status: $Enums.status
@@ -7447,7 +7447,7 @@ export namespace Prisma {
     id?: StringFilter<"Signalemment"> | string
     description?: StringNullableFilter<"Signalemment"> | string | null
     categorie?: StringFilter<"Signalemment"> | string
-    image?: StringFilter<"Signalemment"> | string
+    image?: StringNullableFilter<"Signalemment"> | string | null
     latitude?: IntNullableFilter<"Signalemment"> | number | null
     longitude?: IntNullableFilter<"Signalemment"> | number | null
     status?: EnumstatusFilter<"Signalemment"> | $Enums.status
@@ -7465,7 +7465,7 @@ export namespace Prisma {
     id?: SortOrder
     description?: SortOrderInput | SortOrder
     categorie?: SortOrder
-    image?: SortOrder
+    image?: SortOrderInput | SortOrder
     latitude?: SortOrderInput | SortOrder
     longitude?: SortOrderInput | SortOrder
     status?: SortOrder
@@ -7486,7 +7486,7 @@ export namespace Prisma {
     NOT?: SignalemmentWhereInput | SignalemmentWhereInput[]
     description?: StringNullableFilter<"Signalemment"> | string | null
     categorie?: StringFilter<"Signalemment"> | string
-    image?: StringFilter<"Signalemment"> | string
+    image?: StringNullableFilter<"Signalemment"> | string | null
     latitude?: IntNullableFilter<"Signalemment"> | number | null
     longitude?: IntNullableFilter<"Signalemment"> | number | null
     status?: EnumstatusFilter<"Signalemment"> | $Enums.status
@@ -7504,7 +7504,7 @@ export namespace Prisma {
     id?: SortOrder
     description?: SortOrderInput | SortOrder
     categorie?: SortOrder
-    image?: SortOrder
+    image?: SortOrderInput | SortOrder
     latitude?: SortOrderInput | SortOrder
     longitude?: SortOrderInput | SortOrder
     status?: SortOrder
@@ -7526,7 +7526,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Signalemment"> | string
     description?: StringNullableWithAggregatesFilter<"Signalemment"> | string | null
     categorie?: StringWithAggregatesFilter<"Signalemment"> | string
-    image?: StringWithAggregatesFilter<"Signalemment"> | string
+    image?: StringNullableWithAggregatesFilter<"Signalemment"> | string | null
     latitude?: IntNullableWithAggregatesFilter<"Signalemment"> | number | null
     longitude?: IntNullableWithAggregatesFilter<"Signalemment"> | number | null
     status?: EnumstatusWithAggregatesFilter<"Signalemment"> | $Enums.status
@@ -7806,7 +7806,7 @@ export namespace Prisma {
   export type SignalemmentCreateInput = {
     id?: string
     description?: string | null
-    image: string
+    image?: string | null
     latitude?: number | null
     longitude?: number | null
     status?: $Enums.status
@@ -7822,7 +7822,7 @@ export namespace Prisma {
     id?: string
     description?: string | null
     categorie: string
-    image: string
+    image?: string | null
     latitude?: number | null
     longitude?: number | null
     status?: $Enums.status
@@ -7836,7 +7836,7 @@ export namespace Prisma {
   export type SignalemmentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableIntFieldUpdateOperationsInput | number | null
     longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
@@ -7852,7 +7852,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: StringFieldUpdateOperationsInput | string
-    image?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableIntFieldUpdateOperationsInput | number | null
     longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
@@ -7867,7 +7867,7 @@ export namespace Prisma {
     id?: string
     description?: string | null
     categorie: string
-    image: string
+    image?: string | null
     latitude?: number | null
     longitude?: number | null
     status?: $Enums.status
@@ -7880,7 +7880,7 @@ export namespace Prisma {
   export type SignalemmentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableIntFieldUpdateOperationsInput | number | null
     longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
@@ -7892,7 +7892,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: StringFieldUpdateOperationsInput | string
-    image?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableIntFieldUpdateOperationsInput | number | null
     longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
@@ -8911,7 +8911,7 @@ export namespace Prisma {
   export type SignalemmentCreateWithoutUderIdInput = {
     id?: string
     description?: string | null
-    image: string
+    image?: string | null
     latitude?: number | null
     longitude?: number | null
     status?: $Enums.status
@@ -8926,7 +8926,7 @@ export namespace Prisma {
     id?: string
     description?: string | null
     categorie: string
-    image: string
+    image?: string | null
     latitude?: number | null
     longitude?: number | null
     status?: $Enums.status
@@ -9018,7 +9018,7 @@ export namespace Prisma {
     id?: StringFilter<"Signalemment"> | string
     description?: StringNullableFilter<"Signalemment"> | string | null
     categorie?: StringFilter<"Signalemment"> | string
-    image?: StringFilter<"Signalemment"> | string
+    image?: StringNullableFilter<"Signalemment"> | string | null
     latitude?: IntNullableFilter<"Signalemment"> | number | null
     longitude?: IntNullableFilter<"Signalemment"> | number | null
     status?: EnumstatusFilter<"Signalemment"> | $Enums.status
@@ -9055,7 +9055,7 @@ export namespace Prisma {
   export type SignalemmentCreateWithoutCommuneidInput = {
     id?: string
     description?: string | null
-    image: string
+    image?: string | null
     latitude?: number | null
     longitude?: number | null
     status?: $Enums.status
@@ -9070,7 +9070,7 @@ export namespace Prisma {
     id?: string
     description?: string | null
     categorie: string
-    image: string
+    image?: string | null
     latitude?: number | null
     longitude?: number | null
     status?: $Enums.status
@@ -9391,7 +9391,7 @@ export namespace Prisma {
   export type SignalemmentCreateWithoutCategorieIdInput = {
     id?: string
     description?: string | null
-    image: string
+    image?: string | null
     latitude?: number | null
     longitude?: number | null
     status?: $Enums.status
@@ -9405,7 +9405,7 @@ export namespace Prisma {
   export type SignalemmentUncheckedCreateWithoutCategorieIdInput = {
     id?: string
     description?: string | null
-    image: string
+    image?: string | null
     latitude?: number | null
     longitude?: number | null
     status?: $Enums.status
@@ -9482,7 +9482,7 @@ export namespace Prisma {
   export type SignalemmentCreateWithoutAssignationInput = {
     id?: string
     description?: string | null
-    image: string
+    image?: string | null
     latitude?: number | null
     longitude?: number | null
     status?: $Enums.status
@@ -9497,7 +9497,7 @@ export namespace Prisma {
     id?: string
     description?: string | null
     categorie: string
-    image: string
+    image?: string | null
     latitude?: number | null
     longitude?: number | null
     status?: $Enums.status
@@ -9569,7 +9569,7 @@ export namespace Prisma {
   export type SignalemmentUpdateWithoutAssignationInput = {
     id?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableIntFieldUpdateOperationsInput | number | null
     longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
@@ -9584,7 +9584,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: StringFieldUpdateOperationsInput | string
-    image?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableIntFieldUpdateOperationsInput | number | null
     longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
@@ -9598,7 +9598,7 @@ export namespace Prisma {
     id?: string
     description?: string | null
     categorie: string
-    image: string
+    image?: string | null
     latitude?: number | null
     longitude?: number | null
     status?: $Enums.status
@@ -9614,7 +9614,7 @@ export namespace Prisma {
   export type SignalemmentUpdateWithoutUderIdInput = {
     id?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableIntFieldUpdateOperationsInput | number | null
     longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
@@ -9629,7 +9629,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: StringFieldUpdateOperationsInput | string
-    image?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableIntFieldUpdateOperationsInput | number | null
     longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
@@ -9643,7 +9643,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: StringFieldUpdateOperationsInput | string
-    image?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableIntFieldUpdateOperationsInput | number | null
     longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
@@ -9668,7 +9668,7 @@ export namespace Prisma {
     id?: string
     description?: string | null
     categorie: string
-    image: string
+    image?: string | null
     latitude?: number | null
     longitude?: number | null
     status?: $Enums.status
@@ -9694,7 +9694,7 @@ export namespace Prisma {
   export type SignalemmentUpdateWithoutCommuneidInput = {
     id?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableIntFieldUpdateOperationsInput | number | null
     longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
@@ -9709,7 +9709,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: StringFieldUpdateOperationsInput | string
-    image?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableIntFieldUpdateOperationsInput | number | null
     longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
@@ -9723,7 +9723,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: StringFieldUpdateOperationsInput | string
-    image?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableIntFieldUpdateOperationsInput | number | null
     longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
@@ -9797,7 +9797,7 @@ export namespace Prisma {
   export type SignalemmentCreateManyCategorieIdInput = {
     id?: string
     description?: string | null
-    image: string
+    image?: string | null
     latitude?: number | null
     longitude?: number | null
     status?: $Enums.status
@@ -9810,7 +9810,7 @@ export namespace Prisma {
   export type SignalemmentUpdateWithoutCategorieIdInput = {
     id?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableIntFieldUpdateOperationsInput | number | null
     longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
@@ -9824,7 +9824,7 @@ export namespace Prisma {
   export type SignalemmentUncheckedUpdateWithoutCategorieIdInput = {
     id?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableIntFieldUpdateOperationsInput | number | null
     longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status
@@ -9838,7 +9838,7 @@ export namespace Prisma {
   export type SignalemmentUncheckedUpdateManyWithoutCategorieIdInput = {
     id?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableIntFieldUpdateOperationsInput | number | null
     longitude?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusFieldUpdateOperationsInput | $Enums.status

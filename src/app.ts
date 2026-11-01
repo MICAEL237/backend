@@ -8,6 +8,7 @@ import { VerrifyUser } from './features/middlewares/auth-middleware'
 import UserRoute from './features/auth/router/user.route'
 import signRouter from './features/signalements/routers/router.signalement'
 import { UPLOADS_DIR } from './config/multers/multer.config'
+import categorieRouter from './features/categories/routers/router.cat'
 
 dotenv.config()
 
@@ -29,13 +30,15 @@ app.use("/uploads", express.static(UPLOADS_DIR));
 app.use(cookiParser())
 
 
-app.use('/api/v1/commune', commeRouter)
 
 app.use('/api/v1/auth', AuthRoute)
 
 app.use(VerrifyUser)
 app.use('/api/v1/users', UserRoute)
 app.use('/api/v1/sign', signRouter)
+app.use('/api/v1/cat', categorieRouter)
+app.use('/api/v1/commune', commeRouter)
+
 
 
 

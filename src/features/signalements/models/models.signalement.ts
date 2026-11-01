@@ -8,7 +8,6 @@ export class ModelSignalemment {
         data: {
           description: data.description,
           image: data.image!,
-          status: data.status,
           latitude: data.latitude,
           longitude: data.longitude,
 
@@ -37,4 +36,19 @@ export class ModelSignalemment {
       console.log("createSignalemment", error);
     }
   }
+
+
+  static async ReadSign(){
+    try {
+      const read = await prisma.signalemment.findMany()
+      return read
+    } catch (error) {
+      console.log(error)
+      
+    }
+  }
 }
+
+
+
+

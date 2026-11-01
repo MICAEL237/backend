@@ -57,7 +57,7 @@ model Signalemment {
     id          String    @id @default(uuid())
     description String?
     categorie   String    
-    image       String
+    image       String?
     latitude    Int?
     longitude   Int?
     status      status @default(reçus)
